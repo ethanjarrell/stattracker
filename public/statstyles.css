@@ -1,0 +1,18 @@
+*{
+  font-family: 'Play', sans-serif;
+  -webkit-transition:all .25s ease;
+       -moz-transition:all .25s ease;
+             -o-transition:all .25s ease;
+                   transition:all .25s ease;
+}
+
+.listItem {
+  color: black;
+  font-size: 25px;
+  height: 300px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>STAT-TRACKER</title>
+    <link rel="stylesheet" href="/activitystyles.css">
+    <link href="https://fonts.googleapis.com/css?family=Karla|Merriweather+Sans|Play|Roboto+Mono" rel="stylesheet">
+  </head>
+  <body>
+    <div class="bodywrapper">
+      <div class="title1">Welcome to your personal Stat Tracker</div>
+<hr>
+      <div class="form">
+        <div class="title1">Track a new activity </div>
+        <div class="title2">input your activity here </div>
+        <form action="/api/activities" method="post">
+      <fieldset>
+        <div class="labelwrap2">
+          <div class="labelwrap">
+            <label for="activity name">Activity Name</label>
+            <input required type="text" name="activity_name" placeholder="activity name">
+          </div>
+          <div class="labelwrap">
+            <label for="quantity">Quantity</label>
+            <input type="text" name="quantity" placeholder="100">
+          </div>
+        </div>
+
+        </div>
+
+      </fieldset>
+      <div class="form__submit-button">
+        <input type="submit">
+      </div>
+    </form>
+<hr>
+      <div class="listed">
+        <div class="title1">Activities you are tracking </div>
+        <div class="title2">click an activity for more information </div>
+        <div class="activities">
+        {{#activities}}
+        <a name="id" value="{{_id}}" href="/api/activities/id/{{id}}">{{activity_name}}</a>
+        {{/activities}}
+      </div>
+      </div>
+    </div>
+
+  </body>
+</html>
