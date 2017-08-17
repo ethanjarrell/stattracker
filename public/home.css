@@ -1,0 +1,414 @@
+*{
+  font-family: 'Play', sans-serif;
+  -webkit-transition:all .2s ease;
+       -moz-transition:all .2s ease;
+             -o-transition:all .2s ease;
+                   transition:all .2s ease;
+}
+
+body {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.login {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 5px 10px;
+}
+
+.loginContainer {
+  display: flex;
+  align-items: flex-end;
+  flex-flow: column wrap;
+  justify-content: flex-end;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.login__submit-button {
+  margin-right: 10px;
+}
+
+.maintitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  background-color: #474747;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.bodywrapper {
+  display: flex;
+  width: 100vw;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.title1 {
+  font-size: 17px;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title1a {
+  color: #a0a0a0;
+  font-size: 17px;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title2a {
+  color: #cccccc;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.title2b {
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 8px;
+}
+
+.title1container {
+  border-left-color: gray;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  margin-bottom: 15px;
+  border-bottom-style: dashed;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-top-style: dashed;
+  border-top-color: black;
+  border-top-width: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.title1container2 {
+  width: 100%;
+  border-left-color: gray;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  margin-bottom: 15px;
+  border-bottom-style: dashed;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-top-style: dashed;
+  border-top-color: black;
+  border-top-width: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.title1container3 {
+  border-left-color: gray;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  margin-bottom: 15px;
+  border-bottom-style: dashed;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-top-style: dashed;
+  border-top-color: black;
+  border-top-width: 1px;
+  padding-left: 35%;
+  padding-right: 35%;
+}
+
+.title1container4 {
+  border-left-color: gray;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  margin-bottom: 15px;
+  border-bottom-style: dashed;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-top-style: dashed;
+  border-top-color: black;
+  border-top-width: 1px;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.formcontainer {
+  display: flex;
+  justify-content: center;
+}
+
+.category_input {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-start;
+  align-items: center;
+  justify-content: flex-start;
+  flex-basis: 0;
+  flex-grow: 1.5;
+  min-width: 200px;
+  margin-top: 25px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+}
+
+.category_input1 {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 200px;
+  margin-top: 25px;
+
+}
+
+.category_input input {
+  margin-top: 15px;
+}
+
+.input {
+  width: 90%;
+  border-style: none;
+  outline-color: black;
+  outline-width: thin;
+  height: 30px;
+  border-color: #d3d3d3;
+  border-width: 2px;
+  border-style: solid;
+}
+
+input.input1 {
+  background-color: #e8e8e8;
+  border-style: none;
+  outline-color: black;
+  outline-width: thin;
+  height: 30px;
+  border-color: #d3d3d3;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  color: #bcbcbc;
+}
+
+.input2 {
+  background-color: #e8e8e8;
+  border-style: none;
+  outline-color: black;
+  outline-width: thin;
+  height: 20px;
+  border-color: #d3d3d3;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.activity_input {
+  margin-top: 25px;
+  border-left-color: gray;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  display: flex;
+  flex-flow: column wrap;
+  flex-basis: 0;
+  flex-grow: 2;
+  min-width: 250px;
+  justify-content: flex-start;
+}
+
+.activity_input1 {
+  margin-top: 25px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  display: flex;
+  flex-flow: column wrap;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 250px;
+  justify-content: flex-start;
+}
+
+.formInput {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  margin-left: 20px;
+}
+
+.formInput input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title2 {
+  font-size: 16px;
+}
+
+.title2a {
+  color: #d3d3d3;
+  font-size: 16px;
+}
+
+.act {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-flow: row wrap;
+  margin: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-style: italic;
+
+}
+
+a:hover {
+  font-weight: bold;
+  font-size: 17.5px;
+}
+
+.activityname {
+  display: flex;
+  flex-flow: column wrap;
+  flex-basis: 0;
+  flex-grow: 1.5;
+  min-width: 200px;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.activityname1 {
+  display: flex;
+  flex-flow: column wrap;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 200px;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.form__submit-button {
+  cursor: pointer;
+  border: none;
+  height: 30px;
+  font-size: 15px;
+  width: 125px;
+  background-color: #d3d3d3;
+  color: black;
+  border-color: black;
+  border-width: 1.3px;
+  border-style: solid;
+  border-radius: 5px;
+}
+.form__submit-button:hover {
+  font-weight: bold;
+  background-color: #afafaf;
+  border-width: 3px;
+}
+
+.back2cat {
+  display: flex;
+  align-self: flex-start;
+}
+
+.back2cat:hover {
+  font-size: 15px;
+}
+
+.labelAndCheckbox {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

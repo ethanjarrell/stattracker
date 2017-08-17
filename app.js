@@ -5,6 +5,8 @@ const path = require('path');
 const expressValidator = require('express-validator');
 const mustacheExpress = require('mustache-express');
 const Activity = require('./models/activity');
+const Category = require('./models/category');
+const Dates = require('./models/date');
 const User = require('./models/user.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -72,97 +74,112 @@ app.get('/api/auth',
 
 
 app.use(function(req, res, next){
-  console.log('we use the router, and next moves to the next requests');
+  console.log('Mmmm...You are almost there');
   next();
 })
 
 //Show a list of all activities I am tracking, and links to their individual pages
 
-app.get('/api/activities', passport.authenticate('basic', {session: false}), function(req, res){
-  console.log('get activities');
-  Activity.find().then(function(activities){
-    res.render('allActivities', {
-    activities: activities,
-    })
+app.get('/api/login', passport.authenticate('basic', {session: false}), function(req, res){
+  User.find({}).then(function(users){
+  Category.find({}).then(function(categories){
+    Activity.find({}).then(function(activities){
+      console.log(activities);
+      res.render('login', {
+        users: users,
+        categories: categories,
+        activities: activities,
+      })
+    });
+    });
+  });
 });
+
+//====FRONT END LOGIN===//
+
+app.post('/api/login', passport.authenticate('basic', {session: false}), function(req, res){
+  User.create({
+    activity_type: req.body.category,
+  }).then(activity =>{
+    res.redirect('/api/home')
+  });
 });
 
-//Create a new activity for me to track.
+//====CREATE NEW CATEGORY===//
 
-app.post('/api/activities', passport.authenticate('basic', {session: false}), function(req, res){
+app.post('/api/home', passport.authenticate('basic', {session: false}), function(req, res){
+  Category.create({
+    activity_type: req.body.category,
+  }).then(activity =>{
+    res.redirect('/api/home')
+  });
+});
 
+//====RENDER HOME PAGE===//
+
+app.get('/api/home', passport.authenticate('basic', {session: false}), function(req, res){
+  User.find({}).then(function(users){
+  Category.find({}).then(function(categories){
+    Activity.find({}).then(function(activities){
+      console.log(activities);
+      res.render('home', {
+        users: users,
+        categories: categories,
+        activities: activities,
+      })
+    });
+    });
+  });
+});
+
+//====CREATE ACTIVITY===//
+
+app.post('/api/:activity', passport.authenticate('basic', {session: false}), function(req, res){
   Activity.create({
-    activity_name: req.body.activity_name,
-    quantity: req.body.quantity
+    activity_name: req.body.activity,
+    quantity: req.body.quantity,
+    metric: req.body.metric,
+    category: req.params.activity
   }).then(activity =>{
-    res.redirect('/api/activities')
+    console.log("about to log categories");
+    res.redirect('/api/:activity')
   });
 });
 
-//Show information about one activity I am tracking, and give me the data I have recorded for that activity.
 
-app.get('/api/activities/id/:id', passport.authenticate('basic', {session: false}), function(req, res){
+//====RENDER ACTIVITY PAGE===//
 
-  Activity.findById().then(function(activities){
-    res.render('singleActivity', {activities: activities});
-})
-})
-
-//Update one activity I am tracking, changing attributes such as name or type. Does not allow for changing tracked data.
-
-
-app.put('/api/activities/:activity_id', passport.authenticate('basic', {session: false}), function(req, res){
-
-  Activity.findOneAndUpdate({
-    activity_name: req.body.activity_name,
-    quantity: req.body.quantity,
-  }).then(activity =>{
-    res.json(activity)
+app.get('/api/:activity', passport.authenticate('basic', {session: false}), function(req, res){
+  console.log(req.params);
+  User.find({}).then(function(users){
+  Category.findOne({activity_type: req.params.activity}).then(function(categories){
+    Activity.find({activity_name: req.params.activity}).then(function(activities){
+      res.render('activity', {
+        users: users,
+        categories: categories,
+        activities: activities
+      })
+    });
+    });
   });
 });
 
-//Delete one activity I am tracking. This should remove tracked data for that activity as well.
+//====RENDER SPECIFIC ACTIVITY===//
 
-app.delete('/api/activities/:activity_id', passport.authenticate('basic', {session: false}), function(req, res){
-
-  Activity.findOneAndRemove({
-    activity_name: req.body.activity_name,
-    quantity: req.body.quantity,
-  }).then(activity =>{
-    res.json(activity)
-  });
-});
-
-//get all activities by a specific date
-
-app.get('/api/activities/date/:date', passport.authenticate('basic', {session: false}), function(req, res){
-  Activity.find(req.params.date).then(function(err, activity){
-    if (err){
-    res.send(err)
-  }
-  res.json(activity)
-  })
-})
-
-//Update stats to a specific date and ID
-
-app.put('/api/activities/addtodate/:activity_id/:date', passport.authenticate('basic', {session: false}), function(req, res){
-  Activity.findOneAndUpdate({
-    activity_name: req.body.activity_name,
-    quantity: req.body.quantity,
-  }).then(activity =>{
-    res.json(activity)
-  });
-});
-
-//Delete stats for a specific day and ID
-
-app.delete('/api/activities/deletefromdate/:activity_id/:date', passport.authenticate('basic', {session: false}), function(req, res){
-  Activity.findOneAndRemove({
-    activity_name: req.body.activity_name,
-    quantity: req.body.quantity,
-  }).then(activity =>{
-    res.json(activity)
+app.get('/api/:date', passport.authenticate('basic', {session: false}), function(req, res){
+  User.find({}).then(function(users){
+  Category.findOne({category: req.params.activity_type}).then(function(categories){
+    Activity.find({Activity: req.params.Activity}).then(function(activities){
+      Dates.find({}).then(function(dates){
+      res.render('date', {
+        users: users,
+        dates: dates,
+        categories: categories,
+        activities: activities
+      })
+    });
+    });
+    });
   });
 });
 

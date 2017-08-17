@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>STAT-TRACKER</title>
+  <link rel="stylesheet" href="/home.css">
+  <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+</head>
+
+<body>
+  <div class="maintitle">
+
+
+
+    <div class="loginContainer">
+      <div>
+        <div class="login">
+          <div class="title2b">Username: </div>
+          <form class="login_input" action="/api/login" method="post">
+            <input class="input2" required type="text" name="username" placeholder="enter username">
+        </div>
+
+        <div class="login">
+          <div class="title2b">Password: </div>
+          <input class="input2" required type="password" name="password" placeholder="enter password">
+        </div>
+      </div>
+      <div>
+        <input class="login__submit-button" type="submit">
+      </div>
+      </form>
+
+
+    </div>
+
+    Welcome to Stat - Tracker</div>
+
+  <div class="bodywrapper">
+
+    <form class="category_input" action="/api/home" method="post">
+      <div class="title1container">
+        <div class="title1a">Step 1: Create a New Category</div>
+      </div>
+      <label class="title2a">New Category</label>
+      <input disabled="disabled" class="input1" required type="text" name="category" placeholder="please login">
+
+
+      <div class="labelAndCheckbox">
+        <label class="title2a">Category Name:</label>
+      </div>
+
+    </form>
+    <form class="activity_input" action="/api/home" method="post">
+      <div class="title1container">
+        <div class="title1a">Step 2: To Add an Activity to a Specific Category, Click on a Category in the List to the Left</div>
+      </div>
+      <div class="formcontainer">
+
+        <div class="formInput">
+          <div class="title2a">Enter activity</div>
+          <input disabled="disabled" class="input1" required type="text" name="activity" placeholder="please login">
+
+          <div class="title2a">Enter quantity completed</div>
+          <input disabled="disabled" class="input1" required type="text" name="quantity" placeholder="please login">
+
+          <div class="title2a">Enter metric</div>
+          <input disabled="disabled" class="input1" required type="text" name="metric" placeholder="please login">
+
+        </div>
+      </div>
+    </form>
+
+
+
+    <div class="activityname">
+      <div class="title1container">
+        <div class="title1a">Step 3: Click on an Activity to See More Information About a Specific Activity</div>
+      </div>
+      <label class="title2a">Activity Name:</label>
+    </div>
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>STAT-TRACKER</title>
+  <link rel="stylesheet" href="/home.css">
+  <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+</head>
+
+<body>
+  <div class="maintitle">
+
+    Welcome to Stat - Tracker,
+    {{#users}}{{username}}{{/users}}
+  </div>
+
+  <div class="bodywrapper">
+
+    <form class="category_input" action="/api/home" method="post">
+      <div class="title1container2">
+        <div class="title1">Step 1: Create a New Category</div>
+      </div>
+      <label class="title2">New Category</label>
+      <input autocomplete="off" class="input" required type="text" name="category" placeholder="leisure, exercise, business, etc.">
+      <input class="form__submit-button" type="submit">
+
+      <div class="labelAndCheckbox">
+        <div class="title1container3">
+        <div class="title1">Step 2: Select a Category</div>
+      </div>
+        <label class="title2">Category Name:</label>
+
+        {{#categories}}
+          <div class="act"><a href={{activity_type}} value= {{activity_type}}>{{activity_type}}</a>
+          </div>
+        {{/categories}}
+      </div>
+
+    </form>
+    <form class="activity_input1" action="/api/home" method="post">
+      <div class="title1container">
+        <div class="title1a">Step 3: To Add an Activity to a Specific Category, Click on a Category in the List to the Left</div>
+      </div>
+      <div class="formcontainer">
+
+        <div class="formInput">
+          <div class="title2a">Enter activity</div>
+          <input disabled="disabled" class="input1" required type="text" name="activity" value="select category first!">
+
+          <div class="title2a">Enter quantity completed</div>
+          <input disabled="disabled" class="input1" required type="text" name="quantity" value="select category first!">
+
+          <div class="title2a">Enter metric</div>
+          <input disabled="disabled" class="input1" required type="text" name="metric" value="select category first!">
+
+        </div>
+      </div>
+    </form>
+
+
+
+    <div class="activityname1">
+      <div class="title1container">
+        <div class="title1">Step 4: Click on an Activity to See More Information About a Specific Activity</div>
+      </div>
+      <label class="title2">All Tracked Activities:</label>
+      {{#activities}}
+        <div class="act"><a href="/api/:dates">{{activity_name}}</a></div>
+      {{/activities}}
+    </div>
+
+  </div>
+</body>
+
+</html>
