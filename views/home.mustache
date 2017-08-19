@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>STAT-TRACKER</title>
   <link rel="stylesheet" href="/home.css">
-  <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
 </head>
 
 <body>
@@ -22,17 +22,17 @@
         <div class="title1">Step 1: Create a New Category</div>
       </div>
       <label class="title2">New Category</label>
-      <input autocomplete="off" class="input" required type="text" name="category" placeholder="leisure, exercise, business, etc.">
+      <input autocomplete="off" class="input" required type="text" name="category">
       <input class="form__submit-button" type="submit">
 
       <div class="labelAndCheckbox">
         <div class="title1container3">
-        <div class="title1">Step 2: Select a Category</div>
-      </div>
+          <div class="title1">Step 2: Select a Category</div>
+        </div>
         <label class="title2">Category Name:</label>
 
         {{#categories}}
-          <div class="act"><a href={{activity_type}} value= {{activity_type}}>{{activity_type}}</a>
+          <div class="act"><a class="categoryList" href="{{activity_type}}/:{{_id}}" value= {{_id}}>{{activity_type}}</a>
           </div>
         {{/categories}}
       </div>
@@ -65,9 +65,9 @@
         <div class="title1">Step 4: Click on an Activity to See More Information About a Specific Activity</div>
       </div>
       <label class="title2">All Tracked Activities:</label>
-      {{#activities}}
-        <div class="act"><a href="/api/:dates">{{activity_name}}</a></div>
-      {{/activities}}
+
+      <div class="act"><a href="/api/{{#categories}}{{activity_type}}{{/categories}}/{{#activities}}{{activity_name}}{{/activities}}">{{#activities}}{{activity_name}}{{/activities}}</a></div>
+
     </div>
 
   </div>

@@ -13,7 +13,6 @@ const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
 const bcrypt = require('bcryptjs');
 const app = express();
-
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', './views');
@@ -32,9 +31,11 @@ mongoose.connect('mongodb://localhost:27017/stats');
 //Authentication Section
 passport.use(new BasicStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function(err, user){
+    User.findOne({
+      username: username
+    }, function(err, user) {
       // console.log("Here is the User " + user);
-      if (user && bcrypt.compareSync(password, user.password)){
+      if (user && bcrypt.compareSync(password, user.password)) {
         return done(null, user);
       }
       return done(null, false);
@@ -51,134 +52,199 @@ passport.use(new BasicStrategy(
 // });
 
 app.get('/api/auth',
-  passport.authenticate('basic', {session: false}), function (req, res) {
-      res.send('You have been authenticated, ' + req.user.username);
+  passport.authenticate('basic', {
+    session: false
+  }),
+  function(req, res) {
+    res.send('You have been authenticated, ' + req.user.username);
   }
 );
 //End of Authentication Section
 
 //Place holder if you don't go to the correct endpoint to start
-app.get('/', function(req, res){
-  res.send('Please use /api/...');
+app.get('/', function(req, res) {
+  res.redirect('/api/splash');
 });
 //End of place holder
 
 
 //Authentication to endpoint, just returns "You have been authenticated"
 app.get('/api/auth',
-  passport.authenticate('basic', {session: false}), function (req, res) {
-      res.send('You have been authenticated, ' + req.user.name);
+  passport.authenticate('basic', {
+    session: false
+  }),
+  function(req, res) {
+    res.send('You have been authenticated, ' + req.user.name);
   }
 );
 //End of authentication endpoint
 
 
-app.use(function(req, res, next){
-  console.log('Mmmm...You are almost there');
+app.use(function(req, res, next) {
+  console.log('I dont like programming anymore');
   next();
 })
 
-//Show a list of all activities I am tracking, and links to their individual pages
+//====RENDER SPLASHPAGE===//
 
-app.get('/api/login', passport.authenticate('basic', {session: false}), function(req, res){
-  User.find({}).then(function(users){
-  Category.find({}).then(function(categories){
-    Activity.find({}).then(function(activities){
-      console.log(activities);
-      res.render('login', {
-        users: users,
-        categories: categories,
-        activities: activities,
-      })
-    });
+app.get('/api/splash', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
+  User.find({}).then(function(users) {
+    Category.find({}).then(function(categories) {
+      Activity.find({}).then(function(activities) {
+        console.log(activities);
+        res.render('splash', {
+          users: users,
+          categories: categories,
+          activities: activities,
+        })
+      });
     });
   });
 });
 
-//====FRONT END LOGIN===//
+//====RENDER LOGIN PAGE===//
 
-app.post('/api/login', passport.authenticate('basic', {session: false}), function(req, res){
+app.get('/api/signup', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
+  User.find({}).then(function(users) {
+    Category.find({}).then(function(categories) {
+      Activity.find({}).then(function(activities) {
+        console.log(activities);
+        res.render('signup', {
+          users: users,
+          categories: categories,
+          activities: activities,
+        })
+      });
+    });
+  });
+});
+
+//====RENDER LOGIN PAGE===//
+
+app.get('/api/login', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
+  User.find({}).then(function(users) {
+    Category.find({}).then(function(categories) {
+      Activity.find({}).then(function(activities) {
+        console.log(activities);
+        res.render('login', {
+          users: users,
+          categories: categories,
+          activities: activities,
+        })
+      });
+    });
+  });
+});
+
+//====POST LOGIN FOR USER===//
+
+app.post('/api/login', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
   User.create({
     activity_type: req.body.category,
-  }).then(activity =>{
+  }).then(activity => {
     res.redirect('/api/home')
   });
 });
 
 //====CREATE NEW CATEGORY===//
 
-app.post('/api/home', passport.authenticate('basic', {session: false}), function(req, res){
+app.post('/api/home', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
   Category.create({
     activity_type: req.body.category,
-  }).then(activity =>{
+  }).then(activity => {
     res.redirect('/api/home')
   });
 });
 
 //====RENDER HOME PAGE===//
 
-app.get('/api/home', passport.authenticate('basic', {session: false}), function(req, res){
-  User.find({}).then(function(users){
-  Category.find({}).then(function(categories){
-    Activity.find({}).then(function(activities){
-      console.log(activities);
-      res.render('home', {
-        users: users,
-        categories: categories,
-        activities: activities,
-      })
-    });
+app.get('/api/home', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
+  User.find({}).then(function(users) {
+    Category.find({}).then(function(categories) {
+      Activity.find({}).then(function(activities) {
+        console.log(activities);
+        res.render('home', {
+          users: users,
+          categories: categories,
+          activities: activities,
+        })
+      });
     });
   });
 });
 
 //====CREATE ACTIVITY===//
 
-app.post('/api/:activity', passport.authenticate('basic', {session: false}), function(req, res){
+app.post('/api/:activity/:_id', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
   Activity.create({
     activity_name: req.body.activity,
     quantity: req.body.quantity,
     metric: req.body.metric,
-    category: req.params.activity
-  }).then(activity =>{
+    category: req.params.activity,
+    date: req.params.activity
+  }).then(activity => {
     console.log("about to log categories");
-    res.redirect('/api/:activity')
+    res.redirect('/api/home')
   });
 });
 
 
 //====RENDER ACTIVITY PAGE===//
 
-app.get('/api/:activity', passport.authenticate('basic', {session: false}), function(req, res){
+app.get('/api/:activity/:_id', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
   console.log(req.params);
-  User.find({}).then(function(users){
-  Category.findOne({activity_type: req.params.activity}).then(function(categories){
-    Activity.find({activity_name: req.params.activity}).then(function(activities){
-      res.render('activity', {
-        users: users,
-        categories: categories,
-        activities: activities
-      })
-    });
+  User.find({}).then(function(users) {
+    Category.findOne({activity_type: req.params.activity}).then(function(categories) {
+      Activity.find({
+        activity_name: req.params.activity
+      }).then(function(activities) {
+        res.render('activity', {
+          users: users,
+          categories: categories,
+          activities: activities
+        })
+      });
     });
   });
 });
 
 //====RENDER SPECIFIC ACTIVITY===//
 
-app.get('/api/:date', passport.authenticate('basic', {session: false}), function(req, res){
-  User.find({}).then(function(users){
-  Category.findOne({category: req.params.activity_type}).then(function(categories){
-    Activity.find({Activity: req.params.Activity}).then(function(activities){
-      Dates.find({}).then(function(dates){
-      res.render('date', {
-        users: users,
-        dates: dates,
-        categories: categories,
-        activities: activities
-      })
-    });
-    });
+app.get('/api/:category/:activity', passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
+  User.find({}).then(function(users) {
+    Category.findOne({
+      activity_type: req.params.category
+    }).then(function(categories) {
+      Activity.findOne({
+        activity_name: req.params.activity
+      }).then(function(activities) {
+        Dates.find({}).then(function(dates) {
+          res.render('date', {
+            users: users,
+            dates: dates,
+            categories: categories,
+            activities: activities
+          })
+        });
+      });
     });
   });
 });

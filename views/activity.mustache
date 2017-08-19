@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>STAT-TRACKER</title>
   <link rel="stylesheet" href="/home.css">
-  <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
 </head>
 
 <body>
@@ -24,50 +24,49 @@
 
       <div class="labelAndCheckbox">
         <div class="title1container4">
-        <div class="title1a">Step 2: Select a Category</div>
-      </div>
+          <div class="title1a">Step 2: Select a Category</div>
+        </div>
         <label class="title2a">Category Name:</label>
 
 
       </div>
 
     </form>
-
-    <form class="activity_input" action="/api/:{{#activities}}{{category}}{{/activities}}" method="post">
-      <div class="title1container">
-        <div class="title1">Step 3: Use the Input Fields to Add an Activity to the Category You Selected</div>
-      </div>
-      <div class="formcontainer">
-
-
-        <div class="formInput">
-
-          <div class="labelAndCheckbox">
-            <label class="title2">Category Name:</label>
-
-            {{#categories}}
-              <div class="act"> {{activity_type}}
-              </div>
-            {{/categories}}
-          </div>
-
-          <div class="title2">Enter activity</div>
-          <input autocomplete="off" class="input" required type="text" name="activity" placeholder="leisure, exercise, business, etc.">
-
-          <div class="title2">Enter quantity completed</div>
-          <input autocomplete="off" class="input" required type="text" name="quantity" placeholder="100, 10, 5, etc.">
-
-          <div class="title2">Enter metric</div>
-          <input autocomplete="off" class="input" required type="text" name="metric" placeholder="miles, reps, amount, etc.">
-
-          <input class="form__submit-button" type="submit">
-
-          <div><a class="back2cat" href="/api/home">back to all categories</a></div>
-
+    <div class="activity_input">
+      <form action="{{#categories}}{{activity_type}}{{/categories}}" method="post">
+        <div class="title1container">
+          <div class="title1">Step 3: Use the Input Fields to Add an Activity to the Category You Selected</div>
         </div>
-      </div>
-    </form>
+        <div class="formcontainer">
 
+
+          <div class="formInput">
+
+            <div class="labelAndCheckbox">
+              <label class="title2">Category Name:</label>
+
+
+                <div class="act"> {{#categories}}{{activity_type}}{{/categories}}
+                </div>
+
+            </div>
+
+            <div class="title2">New Activity</div>
+            <input autocomplete="off" class="input" required type="text" name="activity">
+
+            <div class="title2">Quantity</div>
+            <input autocomplete="off" class="input" required type="text" name="quantity">
+
+            <div class="title2">Unit of Measurement</div>
+            <input autocomplete="off" class="input" required type="text" name="metric">
+
+            <input class="form__submit-button" type="submit">
+
+          </div>
+        </div>
+      </form>
+      <div><a class="back2cat" href="/api/home">back to all categories</a></div>
+    </div>
 
 
     <div class="activityname">
@@ -75,10 +74,38 @@
         <div class="title1">Step 4: Click on an Activity to See More Information About a Specific Activity</div>
       </div>
 
-      <label class="title2">Activites for: {{#categories}}<div class="act">{{activity_type}}</div>{{/categories}} </label>
-      {{#activities}}
-        <div class="act"><a>{{activity_name}}</a></div>
-      {{/activities}}
+      <div>
+        {{#categories}}{{activity_name}}{{/categories}}
+      </div>
+
+
+      <div class="activityDateContainer">
+        <span>
+            {{#users}}{{username}}{{/users}}
+          </span>
+        <span>
+             completed
+          </span>
+        <span>
+            {{#activities}}{{quantity}}{{/activities}}
+          </span>
+        <span>
+            {{#activities}}{{activity_name}}{{/activities}}
+          </span>
+        <span>
+             on this date:
+          </span>
+        <span>
+            {{#dates}}{{date}}{{/dates}}
+          </span>
+      </div>
+      {{#dates}}
+        <div>{{date}}</div>
+      {{/dates}}
+
+      <div><a class="back2cat" href="/api/home">back to all categories</a></div>
+
+
     </div>
 
   </div>

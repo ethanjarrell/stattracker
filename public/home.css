@@ -1,9 +1,9 @@
-*{
-  font-family: 'Play', sans-serif;
-  -webkit-transition:all .2s ease;
-       -moz-transition:all .2s ease;
-             -o-transition:all .2s ease;
-                   transition:all .2s ease;
+* {
+  font-family: 'Share Tech', sans-serif;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
 }
 
 body {
@@ -26,7 +26,7 @@ body {
   flex-flow: column wrap;
   justify-content: flex-end;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .login__submit-button {
@@ -210,6 +210,8 @@ fieldset {
 .formcontainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .category_input {
@@ -237,7 +239,6 @@ fieldset {
   flex-grow: 1;
   min-width: 200px;
   margin-top: 25px;
-
 }
 
 .category_input input {
@@ -245,12 +246,32 @@ fieldset {
 }
 
 .input {
-  width: 90%;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+  width: 70%;
+  background-color: #f9f9f9;
   border-style: none;
   outline-color: black;
   outline-width: thin;
   height: 30px;
   border-color: #d3d3d3;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.input:hover {
+  width: 75%;
+  border-color: #a0a0a0;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.input:focus {
+  width: 90%;
+  background-color: white;
+  border-color: #a0a0a0;
   border-width: 2px;
   border-style: solid;
 }
@@ -309,6 +330,22 @@ input.input1 {
   justify-content: flex-start;
 }
 
+.activity_input2 {
+  margin-top: 25px;
+  border-left-color: gray;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  display: flex;
+  flex-flow: column wrap;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 250px;
+  justify-content: flex-start;
+}
+
 .formInput {
   width: 90%;
   display: flex;
@@ -319,7 +356,7 @@ input.input1 {
   margin-left: 20px;
 }
 
-.formInput input{
+.formInput input {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -344,22 +381,36 @@ input.input1 {
 }
 
 a {
+  font-size: 20px;
   text-decoration: none;
   color: black;
   font-style: italic;
-
 }
 
 a:hover {
+  color: #d3d3d3;
   font-weight: bold;
-  font-size: 17.5px;
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
+}
+
+.loginlink {
+  font-size: 20px;
+  text-decoration: none;
+  color: lightgray;
+  font-style: italic;
+}
+
+.loginlink:hover {
+  color: white;
+  font-weight: bold;
+  text-shadow: -2.5px -2.5px 0 #000, 2.5px -2.5px 0 #000, -2.5px 2.5px 0 #000, 2.5px 2.5px 0 #000;
 }
 
 .activityname {
   display: flex;
   flex-flow: column wrap;
   flex-basis: 0;
-  flex-grow: 1.5;
+  flex-grow: 2;
   min-width: 200px;
   align-items: center;
   margin-top: 25px;
@@ -378,29 +429,26 @@ a:hover {
 .form__submit-button {
   cursor: pointer;
   border: none;
-  height: 30px;
-  font-size: 15px;
-  width: 125px;
-  background-color: #d3d3d3;
-  color: black;
-  border-color: black;
-  border-width: 1.3px;
-  border-style: solid;
-  border-radius: 5px;
+  font-size: 20px;
 }
+
 .form__submit-button:hover {
+  color: #d3d3d3;
   font-weight: bold;
-  background-color: #afafaf;
-  border-width: 3px;
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
 }
 
 .back2cat {
+  font-size: 20px;
   display: flex;
-  align-self: flex-start;
+  align-self: center;
+  justify-content: center;
 }
 
 .back2cat:hover {
-  font-size: 15px;
+  color: #d3d3d3;
+  font-weight: bold;
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
 }
 
 .labelAndCheckbox {
@@ -411,4 +459,41 @@ a:hover {
   align-items: center;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+span {
+  color: #5e5e5e;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.categoryTitle {
+  font-weight: bold;
+  margin: 7px;
+  font-size: 20px;
+}
+
+.activityDateContainer {
+  width: 90%;
+  background-color: transparent;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  align-items: baseline;
+  flex-flow: row wrap;
+  margin-bottom: 15px;
+  border-bottom-style: dashed;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-top-style: dashed;
+  border-top-color: black;
+  border-top-width: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.bold {
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
 }

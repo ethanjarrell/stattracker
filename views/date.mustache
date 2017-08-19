@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>STAT-TRACKER</title>
   <link rel="stylesheet" href="/home.css">
-  <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
 </head>
 
 <body>
@@ -19,25 +19,31 @@
 
     <form class="category_input1" action="/api/home" method="post">
       <div class="title1container2">
-        <div class="title1">Step 1: Create a New Category</div>
+        <div class="title1a">Step 1: Create a New Category</div>
       </div>
-      <label class="title2">New Category</label>
-      <input autocomplete="off" class="input" required type="text" name="category" placeholder="leisure, exercise, business, etc.">
-      <input class="form__submit-button" type="submit">
+      <label class="title2a">New Category</label>
+      <input autocomplete="off" class="input1" required type="text" name="category" placeholder="leisure, exercise, business, etc.">
+
 
       <div class="labelAndCheckbox">
-        <label class="title2">Category Name:</label>
+        <label class="title2a">Category Name:</label>
 
-        {{#categories}}
-          <div class="act"><a href= {{activity_type}} value= {{activity_type}}>{{activity_type}}</a>
-          </div>
-        {{/categories}}
+
+      </div>
+
+      <div class="labelAndCheckbox">
+        <div class="title1container3">
+          <div class="title1a">Step 2: Select a Category</div>
+        </div>
+        <label class="title2a">Category Name:</label>
+
+
       </div>
 
     </form>
-    <form class="activity_input1" action="/api/home" method="post">
+    <form class="activity_input2" action="/api/home" method="post">
       <div class="title1container">
-        <div class="title1a">Step 2: To Add an Activity to a Specific Category, Click on a Category in the List to the Left</div>
+        <div class="title1a">Step 3: To Add an Activity to a Specific Category, Click on a Category in the List to the Left</div>
       </div>
       <div class="formcontainer">
 
@@ -58,18 +64,47 @@
 
 
     <div class="activityname">
-      <div class="title1container">
-        <div class="title1">Step 3: Click on an Activity to See More Information About a Specific Activity</div>
+      <div class="title1container4">
+        <div class="title1">Step 4: Here are details about this activity</div>
       </div>
-      <label class="title2">Activity Name:</label>
-      {{#activities}}
-        <div>{{activity_name}}</div>
-        <div>{{metric}}</div>
-        <div>{{quantity}}</div>
-      {{/activities}}
+
+      <div class="categoryTitle">
+        {{#categories}}{{activity_type}}{{/categories}}
+      </div>
+
+      <div class="activityDateContainer">
+        <span class="bold">
+            {{#users}}{{username}}{{/users}}
+          </span>
+        <span>
+             completed
+          </span>
+        <span class="bold">
+            {{#activities}}{{quantity}}{{/activities}}
+          </span>
+        <span class="bold">
+            {{#activities}}{{metric}}{{/activities}}
+          </span>
+        <span>
+            of
+          </span>
+        <span class="bold">
+            {{#activities}}{{activity_name}}{{/activities}}
+          </span>
+        <span>
+             on this date:
+          </span>
+        <span class="bold">
+            {{#dates}}{{date}}{{/dates}}
+          </span>
+      </div>
+
       {{#dates}}
         <div>{{date}}</div>
       {{/dates}}
+
+      <div><a class="back2cat" href="/api/home">back to all categories</a></div>
+
     </div>
 
   </div>
