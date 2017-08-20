@@ -1,31 +1,24 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 let Schema = mongoose.Schema;
 
 const activitySchema = new mongoose.Schema({
-  activity_name: {
-    type: String,
-    lowercase: true,
-  },
-  quantity: {
-    type: Number,
-    trim: true,
-    required: true,
-  },
-  metric: {
-    type: String,
-    lowercase: true,
-  },
-  category: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'
-  }],
-  date: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Dates'
-  }],
-})
 
+category : {
+  type: mongoose.Schema.Types.Mixed,
+  ref: 'Category'
+},
+
+activity_name: mongoose.Schema.Types.Mixed,
+
+quantity: Number,
+
+metric: mongoose.Schema.Types.Mixed,
+
+});
+
+activitySchema.plugin(uniqueValidator);
 const Activity = mongoose.model('Activity', activitySchema);
 
 module.exports = Activity

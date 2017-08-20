@@ -5,6 +5,7 @@ const path = require('path');
 const expressValidator = require('express-validator');
 const mustacheExpress = require('mustache-express');
 const Activity = require('./models/activity');
+const uniqueValidator = require('mongoose-unique-validator');
 const Category = require('./models/category');
 const Dates = require('./models/date');
 const User = require('./models/user.js');
@@ -194,8 +195,8 @@ app.post('/api/:activity/:_id', passport.authenticate('basic', {
     activity_name: req.body.activity,
     quantity: req.body.quantity,
     metric: req.body.metric,
-    category: req.params.activity,
-    date: req.params.activity
+    category: req.params._id,
+    // date: req.params.activity
   }).then(activity => {
     console.log("about to log categories");
     res.redirect('/api/home')

@@ -7,7 +7,7 @@ const datesSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  category: [{
+  activity: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Activity'
   }],
