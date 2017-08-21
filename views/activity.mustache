@@ -74,36 +74,44 @@
         <div class="title1">Step 4: Click on an Activity to See More Information About a Specific Activity</div>
       </div>
 
-      <div>
-        {{#categories}}{{activity_name}}{{/categories}}
+
+      <div class="categoryTitle">
+        {{#categories}}{{activity_type}}{{/categories}}
       </div>
 
-
       <div class="activityDateContainer">
-        <span>
+        <span class="bold">
             {{#users}}{{username}}{{/users}}
           </span>
         <span>
              completed
           </span>
-        <span>
+        <span class="bold">
             {{#activities}}{{quantity}}{{/activities}}
           </span>
+        <span class="bold">
+            {{#activities}}{{metric}}{{/activities}}
+          </span>
         <span>
+            of
+          </span>
+        <span class="bold">
             {{#activities}}{{activity_name}}{{/activities}}
           </span>
         <span>
              on this date:
           </span>
-        <span>
+        <span class="bold">
             {{#dates}}{{date}}{{/dates}}
           </span>
       </div>
+
       {{#dates}}
         <div>{{date}}</div>
       {{/dates}}
 
       <div><a class="back2cat" href="/api/home">back to all categories</a></div>
+
 
 
     </div>

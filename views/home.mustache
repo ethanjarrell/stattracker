@@ -32,7 +32,7 @@
         <label class="title2">Category Name:</label>
 
         {{#categories}}
-          <div class="act"><a class="categoryList" href="{{activity_type}}/:{{_id}}" value= {{_id}}>{{activity_type}}</a>
+          <div class="act"><a class="categoryList" href="{{activity_type}}/:{{_id}}/:{{#dates}}{{date}}{{/dates}}" value= {{_id}}{{#dates}}{{date}}{{/dates}}>{{activity_type}}</a>
           </div>
         {{/categories}}
       </div>
@@ -66,7 +66,7 @@
       </div>
       <label class="title2">All Tracked Activities:</label>
 
-      <div class="act"><a href="/api/{{#categories}}{{activity_type}}{{/categories}}/{{#activities}}{{activity_name}}{{/activities}}">{{#activities}}{{activity_name}}{{/activities}}</a></div>
+      <div class="act">{{#activities}}<a href="/api/{{activity_name}}">{{activity_name}}</a>{{/activities}}</div>
 
     </div>
 

@@ -373,8 +373,8 @@ input.input1 {
 .act {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  flex-flow: row wrap;
+  align-items: center;
+  flex-flow: column wrap;
   margin: 8px;
   font-weight: bold;
   font-size: 18px;

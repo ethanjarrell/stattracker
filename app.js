@@ -27,7 +27,7 @@ app.use(expressValidator());
 mongoose.Promise = require('bluebird');
 
 
-mongoose.connect('mongodb://localhost:27017/stats');
+mongoose.connect('mongodb://localhost:27017/stats', { config: { autoIndex: false } });
 
 //Authentication Section
 passport.use(new BasicStrategy(
@@ -188,15 +188,15 @@ app.get('/api/home', passport.authenticate('basic', {
 
 //====CREATE ACTIVITY===//
 
-app.post('/api/:activity/:_id', passport.authenticate('basic', {
+app.post('/api/:activity/:_id/:date', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
   Activity.create({
     activity_name: req.body.activity,
     quantity: req.body.quantity,
     metric: req.body.metric,
-    category: req.params._id,
-    // date: req.params.activity
+    category: req.params.activity,
+    // dates: req.params.activity
   }).then(activity => {
     console.log("about to log categories");
     res.redirect('/api/home')
@@ -206,33 +206,31 @@ app.post('/api/:activity/:_id', passport.authenticate('basic', {
 
 //====RENDER ACTIVITY PAGE===//
 
-app.get('/api/:activity/:_id', passport.authenticate('basic', {
+app.get('/api/:activity/:_id/:date', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
   console.log(req.params);
   User.find({}).then(function(users) {
-    Category.findOne({activity_type: req.params.activity}).then(function(categories) {
-      Activity.find({
-        activity_name: req.params.activity
+    Category.findOne({activity_type: req.params.activity}).populate( 'Activity').then(function(categories) { Activity.find({ activity_name: req.params.activity
       }).then(function(activities) {
         res.render('activity', {
           users: users,
           categories: categories,
-          activities: activities
+          activities: activities,
         })
-      });
+     });
     });
   });
 });
 
 //====RENDER SPECIFIC ACTIVITY===//
 
-app.get('/api/:category/:activity', passport.authenticate('basic', {
+app.get('/api/:activity', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
   User.find({}).then(function(users) {
     Category.findOne({
-      activity_type: req.params.category
+      activity_type: req.params.activity
     }).then(function(categories) {
       Activity.findOne({
         activity_name: req.params.activity

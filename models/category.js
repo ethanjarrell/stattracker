@@ -5,11 +5,16 @@ let Schema = mongoose.Schema;
 
 const categorySchema = new mongoose.Schema({
 
-activity_type: mongoose.Schema.Types.Mixed,
+activity_type: {
+  type: String,
+},
 
-activities: [{
+activities : [{
   type: mongoose.Schema.Types.ObjectId,
-  ref: 'Activity',
+  activity_name: String,
+  quantity: Number,
+  metric: String,
+  ref: 'Activity'
 }],
 
 });

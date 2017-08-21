@@ -5,20 +5,27 @@ let Schema = mongoose.Schema;
 
 const activitySchema = new mongoose.Schema({
 
-category : {
-  type: mongoose.Schema.Types.Mixed,
-  ref: 'Category'
+category: {
+  type: String,
+  ref: 'Category',
 },
-
-activity_name: mongoose.Schema.Types.Mixed,
-
-quantity: Number,
-
-metric: mongoose.Schema.Types.Mixed,
-
+activity_name: {
+  type: String,
+},
+quantity: {
+  type: Number,
+},
+metric: {
+  type: String,
+},
+dates: {
+  type: Date,
+  default: Date.now,
+  ref: 'Dates',
+},
 });
 
-activitySchema.plugin(uniqueValidator);
-const Activity = mongoose.model('Activity', activitySchema);
 
+const Activity = mongoose.model('Activity', activitySchema);
+activitySchema.plugin(uniqueValidator);
 module.exports = Activity
