@@ -7,7 +7,6 @@ const mustacheExpress = require('mustache-express');
 const Activity = require('./models/activity');
 const uniqueValidator = require('mongoose-unique-validator');
 const Category = require('./models/category');
-const Dates = require('./models/date');
 const User = require('./models/user.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -162,6 +161,7 @@ app.post('/api/home', passport.authenticate('basic', {
 }), function(req, res) {
   Category.create({
     activity_type: req.body.category,
+    // activities: req.params,
   }).then(activity => {
     res.redirect('/api/home')
   });
@@ -188,7 +188,7 @@ app.get('/api/home', passport.authenticate('basic', {
 
 //====CREATE ACTIVITY===//
 
-app.post('/api/:activity/:_id/:date', passport.authenticate('basic', {
+app.post('/api/:activity/:_id', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
   Activity.create({
@@ -199,23 +199,19 @@ app.post('/api/:activity/:_id/:date', passport.authenticate('basic', {
     // dates: req.params.activity
   }).then(activity => {
     console.log("about to log categories");
-    res.redirect('/api/home')
+    res.redirect('/api/:activity/:_id')
   });
 });
 
-
 //====RENDER ACTIVITY PAGE===//
 
-app.get('/api/:activity/:_id/:date', passport.authenticate('basic', {
+app.get('/api/:activity/:_id', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
-  console.log(req.params);
   User.find({}).then(function(users) {
-    Category.findOne({activity_type: req.params.activity}).populate( 'Activity').then(function(categories) { Activity.find({ activity_name: req.params.activity
-      }).then(function(activities) {
+    Category.findOne({activity_type: req.params.activity}).then(function(categories) { Activity.find({category: req.params.activity}).then(function(activities) {
         res.render('activity', {
           users: users,
-          categories: categories,
           activities: activities,
         })
      });
@@ -229,20 +225,13 @@ app.get('/api/:activity', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
   User.find({}).then(function(users) {
-    Category.findOne({
-      activity_type: req.params.activity
-    }).then(function(categories) {
-      Activity.findOne({
-        activity_name: req.params.activity
-      }).then(function(activities) {
-        Dates.find({}).then(function(dates) {
+    Category.findOne({activity_type: req.params.activity}).then(function(categories) { Activity.find({ activity_name: req.params.activity
+    }).then(function(activities) {
           res.render('date', {
             users: users,
-            dates: dates,
             categories: categories,
             activities: activities
           })
-        });
       });
     });
   });

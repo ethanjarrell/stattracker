@@ -32,7 +32,9 @@
         <label class="title2">Category Name:</label>
 
         {{#categories}}
-          <div class="act"><a class="categoryList" href="{{activity_type}}/:{{_id}}/:{{#dates}}{{date}}{{/dates}}" value= {{_id}}{{#dates}}{{date}}{{/dates}}>{{activity_type}}</a>
+          <div class="act"><a class="categoryList" href={{activity_type}}/{{_id}} value= {{_id}}{{#dates}}{{date}}{{/dates}}>{{activity_type}}</a>
+
+
           </div>
         {{/categories}}
       </div>

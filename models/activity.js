@@ -18,11 +18,15 @@ quantity: {
 metric: {
   type: String,
 },
-dates: {
+date: {
   type: Date,
-  default: Date.now,
-  ref: 'Dates',
+  default: Date.now
 },
+// dates: {
+//   type: Date,
+//   default: Date.now,
+//   ref: 'Dates',
+// },
 });
 
 

@@ -374,6 +374,7 @@ input.input1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-content: center;
   flex-flow: column wrap;
   margin: 8px;
   font-weight: bold;
@@ -478,7 +479,7 @@ span {
   background-color: transparent;
   display: flex;
   align-items: stretch;
-  justify-content: space-around;
+  justify-content: center;
   align-items: baseline;
   flex-flow: row wrap;
   margin-bottom: 15px;
@@ -496,4 +497,10 @@ span {
   font-size: 18px;
   color: black;
   font-weight: bold;
+}
+
+.delete{
+  color: #a0a0a0;
+  margin-left: 16px;
+  font-size: 17px;
 }

@@ -33,7 +33,7 @@
 
     </form>
     <div class="activity_input">
-      <form action="{{#categories}}{{activity_type}}{{/categories}}" method="post">
+      <form action="{{#activities}}{{category}}{{/activities}}" method="post">
         <div class="title1container">
           <div class="title1">Step 3: Use the Input Fields to Add an Activity to the Category You Selected</div>
         </div>
@@ -46,8 +46,12 @@
               <label class="title2">Category Name:</label>
 
 
-                <div class="act"> {{#categories}}{{activity_type}}{{/categories}}
+                <div class="act">
+                  {{#categories}}
+                   {{activity_type}}
+                   {{/categories}}
                 </div>
+
 
             </div>
 
@@ -75,11 +79,21 @@
       </div>
 
 
+        {{#activities}}
       <div class="categoryTitle">
-        {{#categories}}{{activity_type}}{{/categories}}
+        {{category}}
       </div>
 
       <div class="activityDateContainer">
+        <span>
+             While doing
+          </span>
+        <span class="bold">
+          {{category}}
+          </span>
+          <span>
+               stuff,
+            </span>
         <span class="bold">
             {{#users}}{{username}}{{/users}}
           </span>
@@ -87,32 +101,28 @@
              completed
           </span>
         <span class="bold">
-            {{#activities}}{{quantity}}{{/activities}}
+          {{quantity}}
           </span>
         <span class="bold">
-            {{#activities}}{{metric}}{{/activities}}
+          {{metric}}
           </span>
         <span>
             of
           </span>
         <span class="bold">
-            {{#activities}}{{activity_name}}{{/activities}}
+          {{activity_name}}
           </span>
         <span>
              on this date:
           </span>
         <span class="bold">
-            {{#dates}}{{date}}{{/dates}}
+          {{date}}
           </span>
       </div>
-
-      {{#dates}}
-        <div>{{date}}</div>
-      {{/dates}}
-
+      {{/activities}}
       <div><a class="back2cat" href="/api/home">back to all categories</a></div>
 
-
+    </div>
 
     </div>
 

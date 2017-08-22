@@ -69,10 +69,19 @@
       </div>
 
       <div class="categoryTitle">
-        {{#categories}}{{activity_type}}{{/categories}}
+        {{#activities}}{{category}}{{/activities}}
       </div>
 
       <div class="activityDateContainer">
+        <span>
+             While doing
+          </span>
+        <span class="bold">
+            {{#activities}}{{category}}{{/activities}}
+          </span>
+          <span>
+               stuff,
+            </span>
         <span class="bold">
             {{#users}}{{username}}{{/users}}
           </span>
@@ -95,13 +104,9 @@
              on this date:
           </span>
         <span class="bold">
-            {{#dates}}{{date}}{{/dates}}
+            {{#activities}}{{date}}{{/activities}}
           </span>
       </div>
-
-      {{#dates}}
-        <div>{{date}}</div>
-      {{/dates}}
 
       <div><a class="back2cat" href="/api/home">back to all categories</a></div>
 

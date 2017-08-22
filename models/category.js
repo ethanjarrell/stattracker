@@ -9,14 +9,10 @@ activity_type: {
   type: String,
 },
 
-activities : [{
-  type: mongoose.Schema.Types.ObjectId,
-  activity_name: String,
-  quantity: Number,
-  metric: String,
-  ref: 'Activity'
+stats: [{
+  type: String,
+  ref: 'Activity',
 }],
-
 });
 
 categorySchema.plugin(uniqueValidator);
