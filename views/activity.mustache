@@ -78,10 +78,10 @@
         <div class="title1">Step 4: Click on an Activity to See More Information About a Specific Activity</div>
       </div>
 
+      {{#activities}}
 
-        {{#activities}}
       <div class="categoryTitle">
-        {{category}}
+      
       </div>
 
       <div class="activityDateContainer">
@@ -89,7 +89,7 @@
              While doing
           </span>
         <span class="bold">
-          {{category}}
+       {{category}}
           </span>
           <span>
                stuff,
@@ -119,6 +119,7 @@
           {{date}}
           </span>
       </div>
+
       {{/activities}}
       <div><a class="back2cat" href="/api/home">back to all categories</a></div>
 

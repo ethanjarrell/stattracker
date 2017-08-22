@@ -10,6 +10,7 @@ const Category = require('./models/category');
 const User = require('./models/user.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const session = require('express-session');
 const BasicStrategy = require('passport-http').BasicStrategy;
 const bcrypt = require('bcryptjs');
 const app = express();
@@ -22,6 +23,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(expressValidator());
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
 
 mongoose.Promise = require('bluebird');
 
@@ -90,57 +97,94 @@ app.use(function(req, res, next) {
 app.get('/api/splash', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
-  User.find({}).then(function(users) {
-    Category.find({}).then(function(categories) {
-      Activity.find({}).then(function(activities) {
-        console.log(activities);
         res.render('splash', {
-          users: users,
-          categories: categories,
-          activities: activities,
         })
       });
-    });
-  });
-});
 
-//====RENDER LOGIN PAGE===//
+
+//====POST SIGNUP PAGE===//
+
+app.post('/api/signup',passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
+  const user = User.build({
+    name: req.body.name,
+    email: req.body.email,
+    username: req.body.username,
+    password: req.body.password
+  })
+  console.log(req.body);
+
+  User.save().then(function(user) {
+    req.username = user.username;
+    req.session.authenticated = true;
+    res.redirect('/api/login')
+    console.log(req.session);
+  })
+
+
+})
+
+//====RENDER SIGNUP PAGE===//
 
 app.get('/api/signup', passport.authenticate('basic', {
   session: false
 }), function(req, res) {
-  User.find({}).then(function(users) {
-    Category.find({}).then(function(categories) {
-      Activity.find({}).then(function(activities) {
-        console.log(activities);
         res.render('signup', {
-          users: users,
-          categories: categories,
-          activities: activities,
         })
       });
-    });
-  });
-});
+//====POST LOGIN PAGE===//
+
+app.post('/api/login',passport.authenticate('basic', {
+  session: false
+}), function(req, res) {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  User.find({
+      username: username,
+      password: password
+  }).then(user => {
+    if (User.password == password) {
+      req.session.username = username;
+      req.session.userId = User.dataValues.id;
+      req.session.authenticated = true;
+      console.log(req.session);
+
+      res.redirect('/api/home');
+    } else {
+      res.redirect('/api/login');
+      console.log("This is my session", req.session)
+    }
+  })
+})
 
 //====RENDER LOGIN PAGE===//
 
-app.get('/api/login', passport.authenticate('basic', {
+app.get('/api/login',passport.authenticate('basic', {
   session: false
 }), function(req, res) {
-  User.find({}).then(function(users) {
-    Category.find({}).then(function(categories) {
-      Activity.find({}).then(function(activities) {
-        console.log(activities);
-        res.render('login', {
-          users: users,
-          categories: categories,
-          activities: activities,
-        })
-      });
-    });
-  });
-});
+  if (req.session && req.session.authenticated) {
+    var user = models.user.findOne({
+      where: {
+        username: req.session.username,
+        password: req.session.password
+      }
+    }).then(function(user) {
+      if (user) {
+        req.session.username = req.body.username;
+        req.session.userId = user.dataValues.id;
+        let username = req.session.username;
+        let userid = req.session.userId;
+        res.render('index', {
+          user: user
+        });
+      }
+    })
+  } else {
+    res.redirect('/api/signup')
+  }
+})
 
 //====POST LOGIN FOR USER===//
 

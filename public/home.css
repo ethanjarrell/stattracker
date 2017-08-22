@@ -476,7 +476,7 @@ span {
 
 .activityDateContainer {
   width: 90%;
-  background-color: transparent;
+  background-color: #f2f2f2;
   display: flex;
   align-items: stretch;
   justify-content: center;
